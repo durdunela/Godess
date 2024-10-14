@@ -17,7 +17,6 @@ class ChurchMap extends StatelessWidget {
         ],
         backgroundColor: const Color(0xFFCBAA7A),
       ),
-      drawer: const CustomDrawer(),
       body: Column(
         children: [
           // Dropdown filter

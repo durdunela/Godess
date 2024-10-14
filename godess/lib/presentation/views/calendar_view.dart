@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:godess/widgets/custom_drawer.dart';
 
 class ChurchCalendar extends StatelessWidget {
   const ChurchCalendar({super.key});
@@ -11,7 +10,6 @@ class ChurchCalendar extends StatelessWidget {
         title: const Text('Calendar'),
         backgroundColor: const Color(0xFFCBAA7A),
       ),
-      drawer: const CustomDrawer(),
       body: const CalendarBody(),
     );
   }

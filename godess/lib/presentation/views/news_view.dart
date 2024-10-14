@@ -17,7 +17,6 @@ class NewsPage extends StatelessWidget {
         ],
         backgroundColor: const Color(0xFFCBAA7A),
       ),
-      drawer: const CustomDrawer(),
       body: Column(
         children: [
           const SizedBox(height: 10),
