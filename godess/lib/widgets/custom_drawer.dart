@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:godess/presentation/views/calendar_view.dart';
-import 'package:godess/presentation/views/goods_view.dart';
 import 'package:godess/presentation/views/news_view.dart';
 import 'package:godess/presentation/views/map_view.dart';
-import 'package:godess/presentation/views/prayers_view.dart';
-import 'package:godess/presentation/views/television_view.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});

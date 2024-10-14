@@ -56,29 +56,6 @@ class NewsPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFFCBAA7A),
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'მთავარი',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'ლიტურგია',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_florist),
-            label: 'შემოწირულობა',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'მაღაზია',
-          ),
-        ],
-      ),
     );
   }
 
