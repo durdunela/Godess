@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ChurchCalendar extends StatelessWidget {
   const ChurchCalendar({super.key});
@@ -7,7 +8,7 @@ class ChurchCalendar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Calendar'),
+        title: const Text('კალენდარი'),
         backgroundColor: const Color(0xFFCBAA7A),
       ),
       body: const CalendarBody(),

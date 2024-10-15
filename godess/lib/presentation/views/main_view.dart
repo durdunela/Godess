@@ -5,6 +5,7 @@ import 'package:godess/presentation/views/goods_view.dart';
 import 'package:godess/presentation/views/home_view.dart';
 import 'package:godess/presentation/views/map_view.dart';
 import 'package:godess/presentation/views/news_view.dart';
+import 'package:godess/presentation/views/offering_view.dart';
 import 'package:godess/presentation/views/prayers_view.dart';
 import 'package:godess/presentation/views/television_view.dart';
 
@@ -34,7 +35,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('მაცნე'),
-        backgroundColor: const Color(0xFFAA925C),
+        backgroundColor: const Color(0xFFCBAA7A),
       ),
       drawer: Drawer(
         child: ListView(
@@ -70,8 +71,8 @@ class _MainPageState extends State<MainPage> {
             ListTile(
               title: const Text('შესაწირი'),
               onTap: () {
-                Navigator.pop(context);
-                _onItemTapped(3);
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const OfferingPage()));
               },
             ),
             ListTile(

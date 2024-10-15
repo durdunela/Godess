@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:godess/widgets/custom_drawer.dart';
+import 'package:flutter_svg/svg.dart';
 
 class NewsPage extends StatelessWidget {
-  const NewsPage({Key? key}) : super(key: key);
+  const NewsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('სიახლეები'),
+        backgroundColor: const Color(0xFFAA925C),
         actions: [
           IconButton(
             icon: const Icon(Icons.person),
             onPressed: () {},
           ),
         ],
-        backgroundColor: const Color(0xFFCBAA7A),
       ),
       body: Column(
         children: [
+          _buildTopImageSection(),
           const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -68,6 +69,40 @@ class NewsPage extends StatelessWidget {
       ),
       onPressed: () {},
       child: Text(label),
+    );
+  }
+
+  Widget _buildTopImageSection() {
+    return Stack(
+      children: [
+        Container(
+          height: 150,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(
+                  'http://fortis.ge/wp-content/uploads/2020/05/poto2.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Positioned(
+          top: 30,
+          left: 0,
+          right: 0,
+          child: Center(
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+              ),
+              child: SvgPicture.asset('lib/assets/logo.svg'),
+              height: 100,
+            ),
+          ),
+        ),
+      ],
     );
   }
 

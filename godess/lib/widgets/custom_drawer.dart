@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:godess/presentation/views/calendar_view.dart';
 import 'package:godess/presentation/views/news_view.dart';
 import 'package:godess/presentation/views/map_view.dart';
+import 'package:godess/presentation/views/offering_view.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -42,7 +43,8 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             title: const Text('შესაწირი'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const OfferingPage()));
             },
           ),
           ListTile(
