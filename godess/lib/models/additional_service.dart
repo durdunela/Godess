@@ -1,16 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:godess/presentation/views/goods_view.dart';
-import 'package:godess/presentation/views/map_view.dart';
-
 class AdditionalService {
   final String name;
   final String imagePath;
-  final Widget page;
 
   AdditionalService({
     required this.name,
     required this.imagePath,
-    required this.page,
   });
 
   static List<AdditionalService> getServices() {
@@ -20,7 +14,6 @@ class AdditionalService {
       AdditionalService(
         name: 'საკითხაავი და მოსასმენი ლოცვები',
         imagePath: 'lib/assets/prayers.svg',
-        page: const GoodsPage(),
       ),
     );
 
@@ -28,7 +21,6 @@ class AdditionalService {
       AdditionalService(
         name: 'საეკლესიო სამონასტრო რუქა',
         imagePath: 'lib/assets/map.svg',
-        page: const ChurchMap(),
       ),
     );
 
