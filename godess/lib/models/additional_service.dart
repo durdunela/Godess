@@ -18,8 +18,8 @@ class AdditionalService {
 
     services.add(
       AdditionalService(
-        name: 'სამონასტრო ნაწარმის ონლაინ შესყიდვა',
-        imagePath: 'assets/service.svg',
+        name: 'საკითხაავი და მოსასმენი ლოცვები',
+        imagePath: 'lib/assets/prayers.svg',
         page: const GoodsPage(),
       ),
     );
@@ -27,7 +27,7 @@ class AdditionalService {
     services.add(
       AdditionalService(
         name: 'საეკლესიო სამონასტრო რუქა',
-        imagePath: 'assets/map.svg',
+        imagePath: 'lib/assets/prayers.svg',
         page: const ChurchMap(),
       ),
     );

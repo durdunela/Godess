@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:godess/widgets/custom_appbar.dart';
 
 class ChurchMap extends StatelessWidget {
   const ChurchMap({super.key});
@@ -6,15 +7,8 @@ class ChurchMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('სიახლეები'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {},
-          ),
-        ],
-        backgroundColor: const Color(0xFFCBAA7A),
+      appBar: const CustomAppBar(
+        title: 'საეკლესიო რუქა',
       ),
       body: Column(
         children: [

@@ -25,7 +25,7 @@ class NewsSectionWidget extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.asset('lib/assets/image.png',
+                      child: Image.asset('lib/assets/image5.png',
                           fit: BoxFit.cover),
                     ),
                   ),
@@ -36,7 +36,7 @@ class NewsSectionWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   const Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                    '2024 წლის 16 აპრილს, საპატრიარქო ტახტის მოსაყდრემ, სენაკისა და ჩხოროწყუს მიტროპოლიტმა შიომ (მუჯირი) საქართველოს საპატრიარქოში წითელი ჯვრის საერთაშორისო კომიტეტის (ICRC) წარმომადგენლები მიიღო...',
                     style: TextStyle(fontSize: 12),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,

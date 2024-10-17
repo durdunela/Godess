@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:godess/widgets/custom_appbar.dart';
 
 class AboutUs extends StatelessWidget {
   const AboutUs({super.key});
@@ -7,8 +8,8 @@ class AboutUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFCBAA7A),
+      appBar: const CustomAppBar(
+        title: 'ჩვენს შესახებ',
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -20,7 +21,7 @@ class AboutUs extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildSectionTitle('მაცცნეს შექმნის არსი და მიზნები'),
+                  _buildSectionTitle('მაცნეს შექმნის არსი და მიზნები'),
                   const SizedBox(height: 20),
                   _buildSubSection('მაცნეს იდეის მიზანი'),
                   const SizedBox(height: 20),

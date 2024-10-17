@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:godess/presentation/views/calendar_view.dart';
 import 'package:godess/presentation/views/goods_view.dart';
 import 'package:godess/presentation/views/home_view.dart';
-import 'package:godess/presentation/views/map_view.dart';
-import 'package:godess/presentation/views/news_view.dart';
-import 'package:godess/presentation/views/offering_view.dart';
 import 'package:godess/presentation/views/prayers_view.dart';
 import 'package:godess/presentation/views/television_view.dart';
+import 'package:godess/widgets/custom_appbar.dart';
 import 'package:godess/widgets/custom_drawer.dart';
 
 class MainPage extends StatefulWidget {
@@ -37,11 +34,8 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('მაცნე'),
-        backgroundColor: const Color(0xFFCBAA7A),
-      ),
-      drawer: CustomDrawer(),
+      appBar: const CustomAppBar(title: 'მაცნე'),
+      drawer: const CustomDrawer(),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

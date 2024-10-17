@@ -70,6 +70,22 @@ flutter:
     - lib/assets/necklace.png
     - lib/assets/milk.png
     - lib/assets/image.png
+    - lib/assets/drawer_image.png
+    - lib/assets/konstantine.jpg
+    - lib/assets/image3.png
+    - lib/assets/image2.png
+    - lib/assets/image1.png
+    - lib/assets/image4.png
+    - lib/assets/image5.png
+    - lib/assets/prayers.svg
+    - lib/assets/church_map.svg
+
+
+
+
+
+
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

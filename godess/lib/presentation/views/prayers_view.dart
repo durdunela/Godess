@@ -36,7 +36,7 @@ class PrayersPage extends StatelessWidget {
           const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
-              itemCount: 6, // Simulating 6 items for now
+              itemCount: 6,
               itemBuilder: (context, index) {
                 return _buildListItem();
               },

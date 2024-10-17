@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:godess/widgets/custom_appbar.dart';
 
 class OfferingPage extends StatelessWidget {
   const OfferingPage({super.key});
@@ -7,15 +8,8 @@ class OfferingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFAA925C),
-        title: const Text('შესაწირი'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {},
-          ),
-        ],
+      appBar: const CustomAppBar(
+        title: 'შესაწირი',
       ),
       body: SingleChildScrollView(
         child: Column(
