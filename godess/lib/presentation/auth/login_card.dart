@@ -82,51 +82,54 @@ class _LoginCardState extends ConsumerState<LoginCard> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              CustomRoundedTextField(
-                hintText: 'მომხმარებელი',
-                controller: fullnameController,
-                prefixIcon: const Icon(Icons.alternate_email),
-              ),
-              const SizedBox(height: 15),
-              CustomRoundedTextField(
-                controller: passwordController,
-                hintText: 'პაროლი',
-                prefixIcon: const Icon(Icons.lock),
-                isPassword: true,
-              ),
-              const SizedBox(height: 15),
-              if (errorMessage != null)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: Text(
-                    errorMessage!,
-                    style: const TextStyle(color: Colors.red),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                CustomRoundedTextField(
+                  hintText: 'მომხმარებელი',
+                  controller: fullnameController,
+                  prefixIcon: const Icon(Icons.alternate_email),
+                ),
+                const SizedBox(height: 15),
+                CustomRoundedTextField(
+                  controller: passwordController,
+                  hintText: 'პაროლი',
+                  prefixIcon: const Icon(Icons.lock),
+                  isPassword: true,
+                ),
+                const SizedBox(height: 15),
+                if (errorMessage != null)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Text(
+                      errorMessage!,
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                  ),
+                const SizedBox(height: 16),
+                if (isLoading)
+                  const CircularProgressIndicator()
+                else
+                  const SizedBox(height: 10),
+                CustomButton(
+                  backgroundColor: const Color(0xFFAA925C),
+                  onPressed: _signIn,
+                  text: 'შესვლა',
+                ),
+                TextButton(
+                  onPressed: widget.onSwitchToSignUp,
+                  child: const Text(
+                    "არ ხარ დარეგისტრირებული? შექმენი ანგარიში",
+                    style: TextStyle(color: Colors.black),
                   ),
                 ),
-              const SizedBox(height: 16),
-              if (isLoading)
-                const CircularProgressIndicator()
-              else
-                const SizedBox(height: 10),
-              CustomButton(
-                backgroundColor: const Color(0xFFAA925C),
-                onPressed: _signIn,
-                text: 'შესვლა',
-              ),
-              TextButton(
-                onPressed: widget.onSwitchToSignUp,
-                child: const Text(
-                  "არ ხარ დარეგისტრირებული? შექმენი ანგარიში",
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
