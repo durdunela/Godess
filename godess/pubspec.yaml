@@ -78,7 +78,7 @@ flutter:
     - lib/assets/image4.png
     - lib/assets/image5.png
     - lib/assets/prayers.svg
-    - lib/assets/church_map.svg
+    - lib/assets/map.svg
 
 
 
@@ -86,7 +86,7 @@ flutter:
 
 
 
-
+  
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

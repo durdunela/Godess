@@ -27,7 +27,7 @@ class AdditionalService {
     services.add(
       AdditionalService(
         name: 'საეკლესიო სამონასტრო რუქა',
-        imagePath: 'lib/assets/prayers.svg',
+        imagePath: 'lib/assets/map.svg',
         page: const ChurchMap(),
       ),
     );
