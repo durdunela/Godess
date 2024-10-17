@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:godess/presentation/views/about_us.dart';
 import 'package:godess/presentation/views/calendar_view.dart';
 import 'package:godess/presentation/views/news_view.dart';
 import 'package:godess/presentation/views/map_view.dart';
@@ -50,7 +51,8 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             title: const Text('ჩვენს შესახებ'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const AboutUs()));
             },
           )
         ],
