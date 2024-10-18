@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:godess/models/shows.dart';
+import 'package:godess/services/config.dart';
 
 class TelevisionPage extends StatelessWidget {
   const TelevisionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final apiService = ApiService();
+
     return Scaffold(
       body: Column(
         children: [
@@ -36,10 +40,25 @@ class TelevisionPage extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Expanded(
-            child: ListView.builder(
-              itemCount: 6,
-              itemBuilder: (context, index) {
-                return _buildListItem();
+            child: FutureBuilder<List<Show>>(
+              future: apiService.fetchChannels(), // Call fetchChannels
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(child: Text('No channels found'));
+                }
+
+                final channels = snapshot.data!;
+
+                return ListView.builder(
+                  itemCount: channels.length,
+                  itemBuilder: (context, index) {
+                    return _buildListItem(context, channels[index]);
+                  },
+                );
               },
             ),
           ),
@@ -95,7 +114,7 @@ class TelevisionPage extends StatelessWidget {
     );
   }
 
-  Widget _buildListItem() {
+  Widget _buildListItem(BuildContext context, Show show) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Card(
@@ -103,14 +122,15 @@ class TelevisionPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.0),
         ),
         elevation: 2,
-        child: const ListTile(
-          title: Text('სათაური'),
-          trailing: Column(
+        child: ListTile(
+          title: Text(show.title ?? 'No Title'),
+          trailing: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(Icons.arrow_forward_ios),
             ],
           ),
+          onTap: () {},
         ),
       ),
     );
