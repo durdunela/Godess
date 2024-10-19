@@ -123,6 +123,13 @@ class TelevisionPage extends StatelessWidget {
         ),
         elevation: 2,
         child: ListTile(
+          leading: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Image.network(
+              show.imageUrl ?? 'No image',
+              fit: BoxFit.cover,
+            ),
+          ),
           title: Text(show.title ?? 'No Title'),
           trailing: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
