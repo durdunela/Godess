@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:godess/models/shows.dart';
+import 'package:godess/presentation/views/video_list.dart';
 import 'package:godess/services/config.dart';
 
 class TelevisionPage extends StatelessWidget {
@@ -41,7 +42,7 @@ class TelevisionPage extends StatelessWidget {
           const SizedBox(height: 10),
           Expanded(
             child: FutureBuilder<List<Show>>(
-              future: apiService.fetchChannels(), // Call fetchChannels
+              future: apiService.fetchChannels(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
@@ -137,7 +138,14 @@ class TelevisionPage extends StatelessWidget {
               Icon(Icons.arrow_forward_ios),
             ],
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VideoListScreen(show: show),
+              ),
+            );
+          },
         ),
       ),
     );
