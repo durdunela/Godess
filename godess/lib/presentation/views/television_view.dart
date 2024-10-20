@@ -1,44 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:godess/data/Providers/state_provider.dart';
 import 'package:godess/models/shows.dart';
 import 'package:godess/presentation/views/video_list.dart';
-import 'package:godess/services/config.dart';
 
-class TelevisionPage extends StatefulWidget {
-  const TelevisionPage({super.key});
+class TelevisionPage extends ConsumerWidget {
+  TelevisionPage({super.key});
 
-  @override
-  _TelevisionPageState createState() => _TelevisionPageState();
-}
-
-class _TelevisionPageState extends State<TelevisionPage> {
   final TextEditingController _searchController = TextEditingController();
-  late Future<List<Show>> _allShowsFuture;
-  List<Show> _filteredShows = [];
 
   @override
-  void initState() {
-    super.initState();
-    final apiService = ApiService();
-    _allShowsFuture = apiService.fetchChannels();
-  }
+  Widget build(BuildContext context, WidgetRef ref) {
+    final showsAsyncValue = ref.watch(showProvider);
 
-  void _filterShows(String query, List<Show> allShows) {
-    setState(() {
-      if (query.isEmpty) {
-        _filteredShows = allShows;
-      } else {
-        _filteredShows = allShows
-            .where((show) =>
-                show.title != null &&
-                show.title!.toLowerCase().contains(query.toLowerCase()))
-            .toList();
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
@@ -55,9 +30,8 @@ class _TelevisionPageState extends State<TelevisionPage> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-              onChanged: (query) async {
-                final allShows = await _allShowsFuture;
-                _filterShows(query, allShows);
+              onChanged: (query) {
+                ref.read(showProvider.notifier).filterShows(query);
               },
             ),
           ),
@@ -74,28 +48,21 @@ class _TelevisionPageState extends State<TelevisionPage> {
           ),
           const SizedBox(height: 10),
           Expanded(
-            child: FutureBuilder<List<Show>>(
-              future: _allShowsFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            child: showsAsyncValue.when(
+              data: (shows) {
+                if (shows.isEmpty) {
                   return const Center(child: Text('No channels found'));
                 }
 
-                if (_filteredShows.isEmpty && _searchController.text.isEmpty) {
-                  _filteredShows = snapshot.data!;
-                }
-
                 return ListView.builder(
-                  itemCount: _filteredShows.length,
+                  itemCount: shows.length,
                   itemBuilder: (context, index) {
-                    return _buildListItem(context, _filteredShows[index]);
+                    return _buildListItem(context, shows[index]);
                   },
                 );
               },
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (err, _) => Center(child: Text('Error: $err')),
             ),
           ),
         ],
