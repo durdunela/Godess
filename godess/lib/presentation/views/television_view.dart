@@ -126,9 +126,13 @@ class TelevisionPage extends StatelessWidget {
         child: ListTile(
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
-            child: Image.network(
-              show.imageUrl ?? 'No image',
-              fit: BoxFit.cover,
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: Image.network(
+                show.imageUrl ?? 'No image',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           title: Text(show.title ?? 'No Title'),

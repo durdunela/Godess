@@ -22,8 +22,8 @@ class _VideoListScreenState extends State<VideoListScreen> {
       return YoutubePlayerController(
         initialVideoId: videoId ?? '',
         flags: const YoutubePlayerFlags(
-          autoPlay: true,
-          mute: true,
+          autoPlay: false,
+          mute: false,
           disableDragSeek: false,
           loop: false,
           isLive: false,
@@ -49,22 +49,32 @@ class _VideoListScreenState extends State<VideoListScreen> {
         child: Column(
           children: [
             ListView.builder(
-              shrinkWrap:
-                  true, // Important: allows the ListView to take only the needed height
-              physics:
-                  const NeverScrollableScrollPhysics(), // Prevents nested scrolling
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: widget.show.videoLinks?.length ?? 0,
               itemBuilder: (context, index) {
-                return Center(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width / 1.2,
-                    height: MediaQuery.of(context).size.width / 4,
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    child: YoutubePlayer(
-                      controller: _controllers[index],
-                      showVideoProgressIndicator: true,
+                return Column(
+                  children: [
+                    Center(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width / 1.2,
+                        height: MediaQuery.of(context).size.width / 4,
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        child: YoutubePlayer(
+                          controller: _controllers[index],
+                          showVideoProgressIndicator: true,
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 10),
+                    Text(
+                      widget.show.title ?? 'Untitled Video',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 );
               },
             ),
