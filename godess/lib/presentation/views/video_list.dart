@@ -8,6 +8,7 @@ class VideoListScreen extends StatefulWidget {
   const VideoListScreen({super.key, required this.show});
 
   @override
+  // ignore: library_private_types_in_public_api
   _VideoListScreenState createState() => _VideoListScreenState();
 }
 
