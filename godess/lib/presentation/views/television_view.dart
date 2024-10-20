@@ -4,13 +4,41 @@ import 'package:godess/models/shows.dart';
 import 'package:godess/presentation/views/video_list.dart';
 import 'package:godess/services/config.dart';
 
-class TelevisionPage extends StatelessWidget {
+class TelevisionPage extends StatefulWidget {
   const TelevisionPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final apiService = ApiService();
+  _TelevisionPageState createState() => _TelevisionPageState();
+}
 
+class _TelevisionPageState extends State<TelevisionPage> {
+  final TextEditingController _searchController = TextEditingController();
+  late Future<List<Show>> _allShowsFuture;
+  List<Show> _filteredShows = [];
+
+  @override
+  void initState() {
+    super.initState();
+    final apiService = ApiService();
+    _allShowsFuture = apiService.fetchChannels();
+  }
+
+  void _filterShows(String query, List<Show> allShows) {
+    setState(() {
+      if (query.isEmpty) {
+        _filteredShows = allShows;
+      } else {
+        _filteredShows = allShows
+            .where((show) =>
+                show.title != null &&
+                show.title!.toLowerCase().contains(query.toLowerCase()))
+            .toList();
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
@@ -19,6 +47,7 @@ class TelevisionPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: TextField(
+              controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'საძიებო ველი - გადაცემის მიხედვით',
                 prefixIcon: const Icon(Icons.search),
@@ -26,6 +55,10 @@ class TelevisionPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
+              onChanged: (query) async {
+                final allShows = await _allShowsFuture;
+                _filterShows(query, allShows);
+              },
             ),
           ),
           const SizedBox(height: 10),
@@ -42,7 +75,7 @@ class TelevisionPage extends StatelessWidget {
           const SizedBox(height: 10),
           Expanded(
             child: FutureBuilder<List<Show>>(
-              future: apiService.fetchChannels(),
+              future: _allShowsFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
@@ -52,12 +85,14 @@ class TelevisionPage extends StatelessWidget {
                   return const Center(child: Text('No channels found'));
                 }
 
-                final channels = snapshot.data!;
+                if (_filteredShows.isEmpty && _searchController.text.isEmpty) {
+                  _filteredShows = snapshot.data!;
+                }
 
                 return ListView.builder(
-                  itemCount: channels.length,
+                  itemCount: _filteredShows.length,
                   itemBuilder: (context, index) {
-                    return _buildListItem(context, channels[index]);
+                    return _buildListItem(context, _filteredShows[index]);
                   },
                 );
               },
