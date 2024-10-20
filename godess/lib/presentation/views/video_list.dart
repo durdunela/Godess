@@ -8,6 +8,7 @@ class VideoListScreen extends StatefulWidget {
   const VideoListScreen({super.key, required this.show});
 
   @override
+  // ignore: library_private_types_in_public_api
   _VideoListScreenState createState() => _VideoListScreenState();
 }
 
@@ -22,8 +23,8 @@ class _VideoListScreenState extends State<VideoListScreen> {
       return YoutubePlayerController(
         initialVideoId: videoId ?? '',
         flags: const YoutubePlayerFlags(
-          autoPlay: true,
-          mute: true,
+          autoPlay: false,
+          mute: false,
           disableDragSeek: false,
           loop: false,
           isLive: false,
