@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         alignment: Alignment.center,
                         child: const Text(
-                          'რეგისტრაცია',
+                          'რეგისტრაცია..',
                           style: TextStyle(fontSize: 18.0),
                         ),
                       ),
