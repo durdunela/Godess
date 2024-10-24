@@ -12,12 +12,10 @@ class GoodsPage extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Search bar with cart icon
             Container(
               margin: const EdgeInsets.only(top: 40, left: 20, right: 20),
               child: Row(
                 children: [
-                  // Shrinking search bar
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(boxShadow: [
@@ -45,8 +43,6 @@ class GoodsPage extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(width: 10),
-
-                  // Cart icon
                   IconButton(
                     icon: const Icon(Icons.shopping_cart),
                     onPressed: () {},
@@ -55,8 +51,6 @@ class GoodsPage extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 20),
-
-            // Milk Products Section
             Align(
               alignment: Alignment.centerLeft,
               child: Container(
@@ -91,8 +85,6 @@ class GoodsPage extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 20),
-
-            // Drinks Section
             Align(
               alignment: Alignment.centerLeft,
               child: Container(
@@ -127,8 +119,6 @@ class GoodsPage extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 20),
-
-            // Necklaces Section
             Align(
               alignment: Alignment.centerLeft,
               child: Container(

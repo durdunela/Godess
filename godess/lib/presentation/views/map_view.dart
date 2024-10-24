@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:godess/widgets/custom_appbar.dart';
 
 class ChurchMap extends StatelessWidget {
   const ChurchMap({super.key});
@@ -6,19 +7,11 @@ class ChurchMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('სიახლეები'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {},
-          ),
-        ],
-        backgroundColor: const Color(0xFFCBAA7A),
+      appBar: const CustomAppBar(
+        title: 'საეკლესიო რუქა',
       ),
       body: Column(
         children: [
-          // Dropdown filter
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: DropdownButtonFormField<String>(
@@ -71,12 +64,10 @@ class ChurchMap extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 Container(
-                  width:
-                      double.infinity, // Ensures the container takes full width
+                  width: double.infinity,
                   child: Image.network(
                     'https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/w_1920,c_limit/GoogleMapTA.jpg',
-                    fit: BoxFit
-                        .cover, // Cover the container while maintaining aspect ratio
+                    fit: BoxFit.cover,
                   ),
                 ),
                 const Icon(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:godess/widgets/custom_appbar.dart';
 
 class NewsPage extends StatelessWidget {
   const NewsPage({super.key});
@@ -7,15 +8,8 @@ class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('სიახლეები'),
-        backgroundColor: const Color(0xFFAA925C),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {},
-          ),
-        ],
+      appBar: const CustomAppBar(
+        title: 'სიახლეები',
       ),
       body: Column(
         children: [
@@ -97,8 +91,8 @@ class NewsPage extends StatelessWidget {
                 color: Colors.white,
                 shape: BoxShape.circle,
               ),
-              child: SvgPicture.asset('lib/assets/logo.svg'),
               height: 100,
+              child: SvgPicture.asset('lib/assets/logo.svg'),
             ),
           ),
         ),

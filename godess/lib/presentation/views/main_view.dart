@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:godess/presentation/views/calendar_view.dart';
 import 'package:godess/presentation/views/goods_view.dart';
 import 'package:godess/presentation/views/home_view.dart';
-import 'package:godess/presentation/views/map_view.dart';
-import 'package:godess/presentation/views/news_view.dart';
-import 'package:godess/presentation/views/offering_view.dart';
 import 'package:godess/presentation/views/prayers_view.dart';
 import 'package:godess/presentation/views/television_view.dart';
+import 'package:godess/widgets/custom_appbar.dart';
+import 'package:godess/widgets/custom_drawer.dart';
 
 class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _MainPageState createState() => _MainPageState();
 }
 
@@ -33,58 +34,8 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('მაცნე'),
-        backgroundColor: const Color(0xFFCBAA7A),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Drawer Header'),
-            ),
-            ListTile(
-              title: const Text('სიახლეები'),
-              onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const NewsPage()));
-              },
-            ),
-            ListTile(
-              title: const Text('საკლესიო კალენდარი'),
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const ChurchCalendar()));
-              },
-            ),
-            ListTile(
-              title: const Text('საეკლესიო რუქა'),
-              onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const ChurchMap()));
-              },
-            ),
-            ListTile(
-              title: const Text('შესაწირი'),
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const OfferingPage()));
-              },
-            ),
-            ListTile(
-              title: const Text('ჩვენს შესახებ'),
-              onTap: () {
-                Navigator.pop(context);
-                _onItemTapped(3);
-              },
-            )
-          ],
-        ),
-      ),
+      appBar: const CustomAppBar(title: 'მაცნე'),
+      drawer: const CustomDrawer(),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

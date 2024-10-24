@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:godess/data/auth_providers.dart';
@@ -108,63 +106,70 @@ class _SignupCardState extends ConsumerState<SignupCard> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              CustomRoundedTextField(
-                controller: fullNameController,
-                hintText: 'მომხმარებლის სახელი/გვარი',
-                prefixIcon: const Icon(Icons.alternate_email),
-              ),
-              const SizedBox(height: 15),
-              CustomRoundedTextField(
-                hintText: 'ტელეფონის ნომერი',
-                controller: phoneController,
-                prefixIcon: const Icon(Icons.phone),
-              ),
-              const SizedBox(height: 15),
-              CustomRoundedTextField(
-                controller: passwordController,
-                hintText: 'პაროლი',
-                prefixIcon: const Icon(Icons.lock),
-                isPassword: true,
-              ),
-              const SizedBox(height: 15),
-              CustomRoundedTextField(
-                controller: verificationCodeController,
-                hintText: 'დამადასტურებელი კოდი',
-                prefixIcon: const Icon(Icons.verified),
-              ),
-              const SizedBox(height: 10),
-              if (errorMessage != null)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: Text(
-                    errorMessage!,
-                    style: const TextStyle(color: Colors.red),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Centers the content
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const SizedBox(height: 30), // Add space between logo and fields
+                CustomRoundedTextField(
+                  controller: fullNameController,
+                  hintText: 'მომხმარებლის სახელი/გვარი',
+                  prefixIcon: const Icon(Icons.alternate_email),
+                ),
+                const SizedBox(height: 15),
+                CustomRoundedTextField(
+                  hintText: 'ტელეფონის ნომერი',
+                  controller: phoneController,
+                  prefixIcon: const Icon(Icons.phone),
+                ),
+                const SizedBox(height: 15),
+                CustomRoundedTextField(
+                  controller: passwordController,
+                  hintText: 'პაროლი',
+                  prefixIcon: const Icon(Icons.lock),
+                  isPassword: true,
+                ),
+                const SizedBox(height: 15),
+                CustomRoundedTextField(
+                  controller: verificationCodeController,
+                  hintText: 'დამადასტურებელი კოდი',
+                  prefixIcon: const Icon(Icons.verified),
+                ),
+                const SizedBox(height: 10),
+                if (errorMessage != null)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Text(
+                      errorMessage!,
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                  ),
+                const SizedBox(height: 16),
+                if (isLoading)
+                  const CircularProgressIndicator()
+                else
+                  const SizedBox(height: 10),
+                CustomButton(
+                  backgroundColor: const Color(0xFFAA925C),
+                  onPressed: _signUp,
+                  text: 'რეგისტრაცია',
+                ),
+                const SizedBox(height: 10),
+                // TabView centered with this button
+                TextButton(
+                  onPressed: widget.onSwitchToSignIn,
+                  child: const Text(
+                    "უკვე გაქვთ ანგარიში? შესვლა",
+                    style: TextStyle(color: Colors.black),
                   ),
                 ),
-              const SizedBox(height: 16),
-              if (isLoading)
-                const CircularProgressIndicator()
-              else
-                const SizedBox(height: 10),
-              CustomButton(
-                backgroundColor: const Color(0xFFAA925C),
-                onPressed: _signUp,
-                text: 'რეგისტრაცია',
-              ),
-              TextButton(
-                onPressed: widget.onSwitchToSignIn,
-                child: const Text(
-                  "უკვე გაქვთ ანგარიში? შესვლა",
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

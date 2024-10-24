@@ -25,7 +25,7 @@ class CalendarWidget extends StatelessWidget {
                     ),
                   ),
                   child: Container(
-                    width: 100,
+                    width: 120,
                     padding: const EdgeInsets.all(8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,15 +38,21 @@ class CalendarWidget extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 5),
-                        Image.asset(
-                          events[index].image,
-                          height: 50,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
+                            events[index].image,
+                            height: 60,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                         const SizedBox(height: 5),
                         Text(
                           events[index].title,
                           textAlign: TextAlign.center,
                           style: const TextStyle(fontSize: 12),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
                         ),
                       ],
                     ),

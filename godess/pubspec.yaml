@@ -40,6 +40,7 @@ dependencies:
   flutter_riverpod: ^2.5.3
   flutter_svg: ^2.0.10+1
   font_awesome_flutter: ^10.7.0
+  html: ^0.15.4
 
 dev_dependencies:
   flutter_test:
@@ -70,7 +71,23 @@ flutter:
     - lib/assets/necklace.png
     - lib/assets/milk.png
     - lib/assets/image.png
+    - lib/assets/drawer_image.png
+    - lib/assets/konstantine.jpg
+    - lib/assets/image3.png
+    - lib/assets/image2.png
+    - lib/assets/image1.png
+    - lib/assets/image4.png
+    - lib/assets/image5.png
+    - lib/assets/prayers.svg
+    - lib/assets/map.svg
 
+
+
+
+
+
+
+  
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
