@@ -41,6 +41,8 @@ dependencies:
   flutter_svg: ^2.0.10+1
   font_awesome_flutter: ^10.7.0
   html: ^0.15.4
+  flutter_inappwebview: ^6.1.5
+  youtube_player_flutter: ^9.1.1
 
 dev_dependencies:
   flutter_test:

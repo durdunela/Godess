@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:godess/data/Fetched%20Data/calendar_data.dart';
@@ -6,6 +9,12 @@ import 'package:godess/presentation/auth/login_card.dart';
 import 'package:godess/presentation/auth/singup_card.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (Platform.isAndroid) {
+    await InAppWebViewController.setWebContentsDebuggingEnabled(true);
+  }
+
   runApp(const ProviderScope(child: MyApp()));
 }
 

@@ -22,7 +22,7 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     const PrayersPage(),
     const GoodsPage(),
-    const TelevisionPage(),
+    TelevisionPage(),
   ];
 
   void _onItemTapped(int index) {
