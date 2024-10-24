@@ -5,6 +5,7 @@ class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _CalendarScreenState createState() => _CalendarScreenState();
 }
 
@@ -30,7 +31,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('კალენდარი'),
-        backgroundColor: const Color(0xFFAA925C), // App bar color
+        backgroundColor: const Color(0xFFAA925C),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -50,7 +51,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   },
                   label: 'წელი',
                 ),
-                const SizedBox(width: 20), // Add space between dropdowns
+                const SizedBox(width: 20),
                 _buildDropdownButton(
                   value: selectedMonth,
                   items: List.generate(12, (index) => index + 1),
@@ -64,7 +65,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 20), // Add space between dropdowns and list
+            const SizedBox(height: 20),
             Expanded(
               child: FutureBuilder<List<Map<String, dynamic>>>(
                 future: _calendarData,
@@ -103,7 +104,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
         DropdownButton<int>(
           value: value,
           onChanged: onChanged,
@@ -113,7 +114,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               child: Text(item.toString()),
             );
           }).toList(),
-          style: TextStyle(color: Colors.black, fontSize: 16),
+          style: const TextStyle(color: Colors.black, fontSize: 16),
         ),
       ],
     );
