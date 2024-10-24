@@ -14,7 +14,7 @@ class HomePage extends ConsumerWidget {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            CalendarWidget(),
+            // CalendarWidget(),
             const SizedBox(height: 20),
             const Text(
               'სიახლეები',

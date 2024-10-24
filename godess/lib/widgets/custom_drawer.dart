@@ -39,8 +39,8 @@ class CustomDrawer extends StatelessWidget {
             ListTile(
               title: const Text('საკლესიო კალენდარი'),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const ChurchCalendar()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => CalendarScreen()));
               },
             ),
             ListTile(

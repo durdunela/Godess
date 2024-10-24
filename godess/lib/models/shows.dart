@@ -34,9 +34,4 @@ class Show {
       'imageUrl': imageUrl,
     };
   }
-
-  @override
-  String toString() {
-    return 'Show{title: $title, postTitle: $postTitle, description: $description, videoLinks: $videoLinks, imageUrl: $imageUrl}';
-  }
 }

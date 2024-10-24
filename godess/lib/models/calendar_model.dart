@@ -9,28 +9,19 @@ class Event {
     required this.title,
   });
 
-  static List<Event> getEvent() {
-    return [
-      Event(
-        date: '19.04',
-        image: 'lib/assets/image1.png',
-        title: 'წინადაცვეთა უფლისა ჩვენისა იესუ ქრისტესი',
-      ),
-      Event(
-        date: '20.04',
-        image: 'lib/assets/image2.png',
-        title: 'წინადაცვეთა უფლისა ჩვენისა იესუ ქრისტესი',
-      ),
-      Event(
-        date: '21.04',
-        image: 'lib/assets/image3.png',
-        title: 'წინადაცვეთა უფლისა ჩვენისა იესუ ქრისტესი',
-      ),
-      Event(
-        date: '22.04',
-        image: 'lib/assets/image4.png',
-        title: 'წინადაცვეთა უფლისა ჩვენისა იესუ ქრისტესი',
-      ),
-    ];
+  factory Event.fromJson(Map<String, dynamic> json) {
+    return Event(
+      date: json['date'] as String,
+      image: json['image'] as String,
+      title: json['title'] as String,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'date': date,
+      'image': image,
+      'title': title,
+    };
   }
 }

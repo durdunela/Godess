@@ -1,112 +1,179 @@
 import 'package:flutter/material.dart';
-import 'package:godess/widgets/custom_appbar.dart';
+import 'package:godess/services/config.dart'; // Assuming this contains ApiService
 
-class ChurchCalendar extends StatelessWidget {
-  const ChurchCalendar({super.key});
+class CalendarScreen extends StatefulWidget {
+  const CalendarScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CustomAppBar(
-        title: 'კალენდარი',
-      ),
-      body: CalendarBody(),
-    );
-  }
+  _CalendarScreenState createState() => _CalendarScreenState();
 }
 
-class CalendarBody extends StatelessWidget {
-  const CalendarBody({super.key});
+class _CalendarScreenState extends State<CalendarScreen> {
+  late Future<List<Map<String, dynamic>>> _calendarData;
+  int selectedYear = DateTime.now().year;
+  int selectedMonth = DateTime.now().month;
+
+  @override
+  void initState() {
+    super.initState();
+    _calendarData = ApiService().fetchCalendar(selectedYear, selectedMonth);
+  }
+
+  void _fetchNewData() {
+    setState(() {
+      _calendarData = ApiService().fetchCalendar(selectedYear, selectedMonth);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildTopImageSection(),
-          _buildLiturgicalNavigation(),
-          _buildLiturgicalText(),
-          _buildTextSection('VI ჟამზე: ეს. 45: 11-17.',
-              'მწუხრზე: დაბ. 22: 1-18. იგავ. 17: 17-28; 18: 1-5.'),
-          _buildTextSection('ტიპიკონური მითითებები', 'ტექსტი'),
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('კალენდარი'),
+        backgroundColor: const Color(0xFFAA925C), // App bar color
       ),
-    );
-  }
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildDropdownButton(
+                  value: selectedYear,
+                  items: List.generate(131, (index) => 1970 + index),
+                  onChanged: (newValue) {
+                    setState(() {
+                      selectedYear = newValue!;
+                    });
+                    _fetchNewData();
+                  },
+                  label: 'წელი',
+                ),
+                const SizedBox(width: 20), // Add space between dropdowns
+                _buildDropdownButton(
+                  value: selectedMonth,
+                  items: List.generate(12, (index) => index + 1),
+                  onChanged: (newValue) {
+                    setState(() {
+                      selectedMonth = newValue!;
+                    });
+                    _fetchNewData();
+                  },
+                  label: 'თვე',
+                ),
+              ],
+            ),
+            const SizedBox(height: 20), // Add space between dropdowns and list
+            Expanded(
+              child: FutureBuilder<List<Map<String, dynamic>>>(
+                future: _calendarData,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Center(child: Text('No calendar data found'));
+                  }
 
-  Widget _buildTopImageSection() {
-    return Container(
-      width: double.infinity,
-      height: 200,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image:
-              NetworkImage('https://www.etaloni.ge/gallery/ididishabati.jpg'),
+                  List<Map<String, dynamic>> calendarItems = snapshot.data!;
+                  return ListView.builder(
+                    itemCount: calendarItems.length,
+                    itemBuilder: (context, index) {
+                      final item = calendarItems[index];
+                      return _buildCalendarCard(item);
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildLiturgicalNavigation() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {},
-          ),
-          const Text('დიდი მარხვის მე-5 დღე',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          IconButton(
-            icon: const Icon(Icons.arrow_forward),
-            onPressed: () {},
-          ),
-        ],
-      ),
+  Widget _buildDropdownButton({
+    required int value,
+    required List<int> items,
+    required void Function(int?) onChanged,
+    required String label,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: TextStyle(fontWeight: FontWeight.bold)),
+        DropdownButton<int>(
+          value: value,
+          onChanged: onChanged,
+          items: items.map((item) {
+            return DropdownMenuItem<int>(
+              value: item,
+              child: Text(item.toString()),
+            );
+          }).toList(),
+          style: TextStyle(color: Colors.black, fontSize: 16),
+        ),
+      ],
     );
   }
 
-  Widget _buildLiturgicalText() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'პირველწოდებულის ლიტურგია',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          Text('➤ წმ. ევიქტი კონსტანტინეპოლელი პატრიარქისა (582)'),
-          Text('➤ წმ. მეთოდე მორავიელ მთავარეპისკოპოსისა (885);'),
-          Text('➤ ღირსისა პლატონიდა ასურისა (308);'),
-          Text('➤ 120 სპარსელ მოწამეთა (344-347);'),
-          Text('➤ 120 სპარსელ მოწამეთა (344-347);'),
-          Text('➤ მოწამეთა იერემიასი და არქილე ხუცისა (III);'),
-          Text('➤ ხსენება ზოსიმესი და შიშველმართალთა.'),
-          SizedBox(height: 10),
-        ],
+  Widget _buildCalendarCard(Map<String, dynamic> item) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
       ),
-    );
-  }
-
-  Widget _buildTextSection(String title, String content) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title,
-              style:
-                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 5),
-          Text(content),
-          const SizedBox(height: 10),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                image: DecorationImage(
+                  image: NetworkImage(item['image'] ?? 'No image'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item['name'] ?? 'No name',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    item['date'] ?? 'No date',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    item['alt'] ?? 'No Description',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black54,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
